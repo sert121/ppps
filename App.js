@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet,Button, Text,Alert, View } from 'react-native';
 import socketIO from "socket.io-client"
+
 const socket = socketIO('http://localhost:8000', {      
   transports: ['websocket'], jsonp: false });   
   socket.connect(); 
   socket.on('connect', () => { 
     console.log('connected to socket server'); 
   });
+
+  
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -59,6 +62,10 @@ export default class App extends Component {
         <Text>State: { this.state.connected ? 'Connected' : 'Disconnected' }</Text>
         <Text>Current transport: { this.state.currentTransport }</Text>
         <Text>Last message: { this.state.lastMessage }</Text>
+        <Button
+        title="Press me"
+        onPress={() => Alert.alert('Simple Button pressed')}
+      />
       </View>
     );
   }
